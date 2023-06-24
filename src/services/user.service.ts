@@ -71,7 +71,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
             where: {
                 email
             },
-            relations: ['coursesEnrolled']
+            relations: ['coursesEnrolled','requestedCourses']
         })
 
         if (user) {
