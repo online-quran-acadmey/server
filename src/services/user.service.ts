@@ -4,12 +4,12 @@ import { NextFunction, Request, Response } from "express"
 import { AppDataSource } from "..";
 import jsonWebToken from "jsonwebtoken"
 import { ErrorHandler } from "../util/ErrorHandler";
-import {generateToken} from "../util/generateToken";
-import {User} from "../entities/User";
+import { generateToken } from "../util/generateToken";
+import { User } from "../entities/User";
 
 
 export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
-    const { firstName,middleName, lastName, email, password, dateOfBirth, gender, address, contactNumber, parentGuardianName, parentGuardianContact } = req.body;
+    const { firstName, middleName, lastName, email, password, dateOfBirth, gender, address, contactNumber, parentGuardianName, parentGuardianContact } = req.body;
     const User = AppDataSource.getRepository("User");
     if (!firstName || !lastName || !email || !password) {
         return next(new ErrorHandler("Please Enter All Required Fields", 400))
@@ -26,7 +26,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
 
     const newUser = User.create({
         firstName: firstName,
-        middleName:middleName,
+        middleName: middleName,
         lastName: lastName,
         email: email,
         password: password,
@@ -40,11 +40,11 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
 
     const savedUser = await User.save(newUser,);
 
-    const user=await User.findOne({
-        where:{
-            id:savedUser.id
+    const user = await User.findOne({
+        where: {
+            id: savedUser.id
         },
-        relations:['coursesEnrolled']
+        relations: ['coursesEnrolled']
     })
 
     const token = jsonWebToken.sign(savedUser.id, process.env.SECRET!);
@@ -71,7 +71,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
             where: {
                 email
             },
-            relations: ['coursesEnrolled','requestedCourses']
+            relations: ['coursesEnrolled', 'requestedCourses']
         })
 
         if (user) {
@@ -80,7 +80,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
 
             if (match) {
 
-                const token = await generateToken(user.id,process.env.SECRET!)
+                const token = await generateToken(user.id, process.env.SECRET!)
 
                 return res.json({
                     success: true,
@@ -212,3 +212,5 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
         return next(new ErrorHandler(error.message, 500))
     }
 }
+
+

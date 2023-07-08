@@ -26,3 +26,9 @@ D
 src/entities/User.ts,5\c\5c3eb2c206acf0afd22ed26d07282b084886a67c
 M
 src/services/tutor.service.ts,b\3\b3d3949844d1722cc533c6f0ce69112a759b7b04
+T
+$src/controllers/course.controller.ts,7\b\7b1cb956e78d59b12aca67f1580a9f2eebcb23da
+F
+src/entities/Course.ts,2\6\26605f03cafc213c58c4acdb982c2b0cb90f26fc
+N
+src/services/course.service.ts,d\e\deea2ed411d5fb4e925f712172f717cf6e278844

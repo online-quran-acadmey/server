@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { createUser, deleteUser, login, updateUser, viewUser } from "../services/user.service";
 
+
 const router = Router();
 
 router.post('/create', createUser);

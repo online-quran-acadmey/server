@@ -26,12 +26,12 @@ export class Course {
     @Column({ default: 0 })
     discount: number;
 
-    @ManyToMany(() => User, (user) => user.coursesEnrolled,{eager:true})
+    @ManyToMany(() => User, (user) => user.coursesEnrolled, { eager: true })
     @JoinTable()
     enrolledStudents: User[];
 
-    @ManyToMany(()=>User,(user)=>user.requestedCourses,{eager:true})
+    @ManyToMany(() => User, (user) => user.requestedCourses, { eager: true })
     @JoinTable()
-    requestedStudent:User[];
+    requestedStudent: User[];
 
 }
